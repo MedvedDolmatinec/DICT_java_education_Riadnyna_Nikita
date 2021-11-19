@@ -2,22 +2,28 @@ package CoffeeMachine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-    public static void main(String[] args) {
+    static Object Input(String condition) {
         Scanner input = new Scanner(System.in);
+        if ("String".equals(condition)) {
+            return input.nextLine();
+        } else {return input.nextInt();}
+    }
+
+    public static void main(String[] args) {
 
         // w = water, m = milk, cb = coffee beans, c = cup, $ = money
         Integer[] w_m_cb_c_$ = new Integer[]{400, 540, 120, 9, 550};
 
         while (true) {
             System.out.println("\nWrite action (buy, fill, take, remaining, exit):");
-            String action = input.nextLine();
+            String action = (String) Input("String");
             if (action.equals("exit")) {
                 break;
             }
             switch (action) {
                 case "buy" -> {
                     System.out.println("\nWhat do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
-                    String drink = input.nextLine();
+                    String drink = (String) Input("String");
                     switch (drink) {
                         case "1" -> {  // espresso
                             if (w_m_cb_c_$[0] < 250 || w_m_cb_c_$[2] < 16 || w_m_cb_c_$[3] < 0){
@@ -60,13 +66,13 @@ public class CoffeeMachine {
                 }
                 case "fill" -> {
                     System.out.println("\nWrite how many ml of water you want to add:");
-                    int water_to_add = input.nextInt();
-                    System.out.println("Write how many ml of milk you want to add:");
-                    int milk_to_add = input.nextInt();
+                    int water_to_add = (int) Input("Integer");
+                            System.out.println("Write how many ml of milk you want to add:");
+                    int milk_to_add = (int) Input("Integer");
                     System.out.println("Write how many grams of coffee beans you want to add:");
-                    int cb_to_add = input.nextInt();
+                    int cb_to_add = (int) Input("Integer");
                     System.out.println("Write how many disposable coffee cups you want to add:");
-                    int cups_to_add = input.nextInt();
+                    int cups_to_add = (int) Input("Integer");
                     w_m_cb_c_$[0] += water_to_add;
                     w_m_cb_c_$[1] += milk_to_add;
                     w_m_cb_c_$[2] += cb_to_add;
